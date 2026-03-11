@@ -1,0 +1,36 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import './animations.css';
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Keep top menu visible (Tailwind .collapse conflict override) */
+.rn-navbar .navbar-collapse {
+    visibility: visible !important;
+}
+
+.rn-navbar .navbar-collapse.collapse:not(.show) {
+    display: none !important;
+}
+
+.rn-navbar .navbar-collapse.collapse.show,
+.rn-navbar .navbar-collapse.collapsing {
+    display: block !important;
+}
+
+@media (min-width: 992px) {
+    .rn-navbar .navbar-collapse,
+    .rn-navbar .navbar-collapse.collapse {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
