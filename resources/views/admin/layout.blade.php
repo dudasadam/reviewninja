@@ -30,10 +30,13 @@
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                 Dashboard
             </a>
-            <a href="#" class="rn-sidebar-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20V10m0 0-3 3m3-3 3 3M4 4h16"/></svg>
+            <a href="{{ route('admin.reviews.index') }}" class="rn-sidebar-link @if(request()->routeIs('admin.reviews.*')) active @endif">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 Értékelések
-                <span class="rn-badge ms-auto">24</span>
+                @php $reviewCount = auth()->user()?->reviews()->count() ?? 0 @endphp
+                @if($reviewCount > 0)
+                    <span class="rn-badge ms-auto">{{ $reviewCount }}</span>
+                @endif
             </a>
             <a href="#" class="rn-sidebar-link">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 20h20M6 20V10l6-6 6 6v10"/></svg>

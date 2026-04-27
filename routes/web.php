@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,9 +34,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('users/stop-impersonating',              [UserManagementController::class, 'stopImpersonating'])->name('users.stop-impersonating');
 
     // Google OAuth
-    Route::get('/google/redirect',     [GoogleController::class, 'redirect'])->name('google.redirect');
-    Route::get('/google/callback',     [GoogleController::class, 'callback'])->name('google.callback');
+    Route::get('/google/redirect',      [GoogleController::class, 'redirect'])->name('google.redirect');
+    Route::get('/google/callback',      [GoogleController::class, 'callback'])->name('google.callback');
     Route::delete('/google/disconnect', [GoogleController::class, 'disconnect'])->name('google.disconnect');
+
+    // Reviews
+    Route::get('/reviews',       [ReviewsController::class, 'index'])->name('reviews.index');
+    Route::post('/reviews/sync', [ReviewsController::class, 'sync'])->name('reviews.sync');
 
     Route::prefix('settings')->name('settings.')->group(function () {
         Route::get('/platforms',    [AdminController::class, 'platforms'])->name('platforms');

@@ -8,6 +8,20 @@
 
 <p class="rn-page-desc mb-4">Kösd össze a review platformokat, ahol az ügyfeleid értékelhetnek. Minden aktív platform értékeléseit összegyűjtjük és kezeljük.</p>
 
+{{-- Szinkronizálás gomb ha van csatlakoztatott platform --}}
+@if(collect($platforms)->where('connected', true)->isNotEmpty())
+<div class="d-flex align-items-center gap-3 mb-4">
+    <form method="POST" action="{{ route('admin.reviews.sync') }}" class="m-0">
+        @csrf
+        <button type="submit" class="btn rn-btn rn-btn-primary btn-sm">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:.3rem;vertical-align:middle"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Értékelések szinkronizálása
+        </button>
+    </form>
+    <small class="rn-muted-text">Lehúzza a legfrissebb értékeléseket a csatlakoztatott platformokról</small>
+</div>
+@endif
+
 {{-- Flash üzenetek --}}
 @if(session('success'))
 <div class="rn-alert rn-alert--success mb-4">
